@@ -12,7 +12,7 @@ async def test_get_all_devices():
     # Get the config for the config.json file
     config = Config()
     soti_config = config.get_soti_config()
-    # Create the SOTI API client
+    # Create the SOTI API client (httpx.AsyncClient)
     client = soti_api_client(soti_config)
     # Device counter
     total_devices = 0
