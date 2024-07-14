@@ -2,6 +2,7 @@ from typing import AsyncGenerator
 from soti_mobicontrol_api.endpoints.device.get_devices import get_devices
 from soti_mobicontrol_api.soti_api_client import soti_api_client
 import logging
+from time import perf_counter
 
 # Get all devices by calling the soti_get_device function until all devices are retrieved
 # Returns a counter of the total number of devices
@@ -9,6 +10,8 @@ async def get_all_devices(client:soti_api_client, device_group_path:str, filter,
     # Set the initial values for skip and take
     skip = 0
     take = 20
+    # Start the performance timer
+    t1_start = perf_counter()
     # Initialize a counter for the total number of devices
     total_devices = 0
     # Check if there are more devices to fetch
@@ -29,6 +32,10 @@ async def get_all_devices(client:soti_api_client, device_group_path:str, filter,
         # Increment the skip value
         skip += take
     
-    logging.info(f"Total number of devices from SOTI: {total_devices}")
+    # Stop the performance timer
+    t1_stop = perf_counter()
+
+    # Log the total number of devices and the time it took to retrieve them
+    logging.info(f"Total number of devices from SOTI: {total_devices}. Time: {t1_stop - t1_start:.0f} seconds")
 
 
