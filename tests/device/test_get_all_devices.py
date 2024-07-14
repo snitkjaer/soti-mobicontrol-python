@@ -8,6 +8,7 @@ from soti_mobicontrol_api.endpoints.device.get_all_devices import get_all_device
 
 @pytest.mark.asyncio
 async def test_get_all_devices():
+    #
     #### Arrange
     # Get the config for the config.json file
     config = Config()
@@ -19,6 +20,7 @@ async def test_get_all_devices():
 
     groups = soti_config['deviceGroupPaths']
 
+    #
     #### Act
     # Get all devices from SOTI for each device group path in groupPaths
     for group in groups:
@@ -29,5 +31,7 @@ async def test_get_all_devices():
     # Close the client
     await client.close()
 
+    #
     #### Assert
+    # Assert that the total devices is greater than 0
     assert total_devices > 0
