@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "soti_mobicontrol_api"
+version = "0.1.0"
+description = "A Python wrapper for the SOTI MobiControl API"
+readme = "README.md"
+license = {file = "LICENSE"}
+authors = [
+    {name = "Bo Snitkjaer Nielsen", email = "snitkjaer@gmail.com"}
+]
+dependencies = ["requests"]
+
+[tool.setuptools]
+packages = ["find:"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+exclude = ["tests"]
