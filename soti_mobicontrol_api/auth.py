@@ -1,4 +1,5 @@
 import base64
+import logging
 import httpx
 
 # Get the access token
@@ -52,12 +53,17 @@ def get_access_token(soti_config: dict):
         return token_response.get("access_token")
     else:
         # Handle error responses
+        # Raise an exception with the error message
         response.raise_for_status()
 
 
 def create_soti_headers(soti_config:dict):
     # Get the access token
     access_token = get_access_token(soti_config)
+
+    # Check the access token validity by extracting the expiry time and refreshing the token if necessary
+    
+
 
     # Define the headers, including the access token
     headers = {

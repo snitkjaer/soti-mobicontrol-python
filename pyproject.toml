@@ -1,21 +1,42 @@
-[build-system]
-requires = ["setuptools", "wheel"]
-build-backend = "setuptools.build_meta"
-
 [project]
 name = "soti_mobicontrol_api"
 version = "0.1.0"
 description = "A Python wrapper for the SOTI MobiControl API"
 readme = "README.md"
-license = {file = "LICENSE"}
-authors = [
-    {name = "Bo Snitkjaer Nielsen", email = "snitkjaer@gmail.com"}
+license = { file = "LICENSE" }
+authors = [{ name = "Bo Snitkjaer Nielsen", email = "snitkjaer@gmail.com" }]
+dependencies = [
+    "httpx >= 0.27.0",
+    'tomli; python_version < "3.12"'
 ]
-dependencies = ["httpx"]
+requires-python = ">=3.12"
 
-[tool.setuptools]
-packages = ["find:"]
+[project.optional-dependencies]
+build = ["build", "twine"]
+dev = ["black", "bumpver", "isort", "mypy", "pytest"]
 
-[tool.setuptools.packages.find]
-where = ["."]
-exclude = ["tests"]
+[tool.bumpver]
+current_version = "0.0.1"
+version_pattern = "MAJOR.MINOR.PATCH"
+commit_message = "bump version {old_version} -> {new_version}"
+commit = true
+tag = true
+push = false
+
+[tool.isort]
+profile = "black"
+import_heading_stdlib = "Standard library imports"
+import_heading_thirdparty = "Third party imports"
+import_heading_firstparty = "Parser imports"
+
+[tool.mypy]
+strict = true
+
+[[tool.mypy.overrides]]
+module = "terraform-template-parser"
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+pythonpath = [
+  "."
+]
