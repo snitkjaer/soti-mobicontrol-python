@@ -38,3 +38,9 @@ poetry add anyio
 poetry add httpx
 
 ```
+
+
+### Build the package locally
+```bash
+poetry build
+```
