@@ -1,9 +1,10 @@
 import httpx
 from .auth import Auth
+from .soti_mobicontrol_config import SotiMobiControlServerConfig
 
 class soti_api_client:
-    def __init__(self, soti_config: dict):
-        self.base_url = f"https://{soti_config['FQDN']}/MobiControl/api"
+    def __init__(self, soti_config: SotiMobiControlServerConfig):
+        self.base_url = f"https://{soti_config.FQDN}/MobiControl/api"
         # soti_config contains the configuration parameters
         self.soti_config = soti_config
         # Create an HTTP client

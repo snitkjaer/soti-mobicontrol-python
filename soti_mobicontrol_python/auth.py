@@ -2,10 +2,11 @@ import base64
 import logging
 import httpx
 from datetime import datetime, timedelta
+from .soti_mobicontrol_config import SotiMobiControlServerConfig
 
 class Auth:
-    def __init__(self, soti_config: dict):
-        self.soti_config = soti_config
+    def __init__(self, soti_config: SotiMobiControlServerConfig):
+        self.soti_config:SotiMobiControlServerConfig = soti_config
         self.access_token_dict = self.get_access_token_dict()
 
     def get_soti_headers(self)->dict:
@@ -42,7 +43,7 @@ class Auth:
             HTTPError: If the request to retrieve the access token fails.
         """
         # Combine client_id and client_secret into a single string
-        auth_string = f"{self.soti_config['clientId']}:{self.soti_config['clientSecret']}"
+        auth_string = f"{self.soti_config.clientId}:{self.soti_config.clientSecret}"
         
         # Encode the auth_string using Base64
         auth_encoded = base64.b64encode(auth_string.encode()).decode()
@@ -56,12 +57,12 @@ class Auth:
         # Construct the request body
         data = {
             "grant_type": "password",
-            "username": self.soti_config['username'],
-            "password": self.soti_config['password']
+            "username": self.soti_config.username,
+            "password": self.soti_config.password
         }
         
         # URL for the token request
-        url = f"https://{self.soti_config['FQDN']}/MobiControl/api/token"
+        url = f"https://{self.soti_config.FQDN}/MobiControl/api/token"
         
         # Get date and time
         starttime = datetime.now()
