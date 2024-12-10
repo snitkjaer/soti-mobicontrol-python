@@ -2,7 +2,7 @@ import urllib.parse
 
 from ...soti_api_client import soti_api_client
 
-async def get_devices(client:soti_api_client, device_group_path:str, filter, include_subgroups:bool, verify_and_sync:bool, skip:int, take:int):
+async def get_device_batch(client:soti_api_client, device_group_path:str, filter, include_subgroups:bool, verify_and_sync:bool, skip:int, take:int):
     endpoint = "/devices/search"
     groupPath = device_group_path.lstrip('/')
     groupPath = "//" + groupPath

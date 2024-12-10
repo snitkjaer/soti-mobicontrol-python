@@ -1,10 +1,11 @@
 from typing import AsyncGenerator
-from .get_devices import get_devices
+from .get_device_batch import get_device_batch
 from ...soti_api_client import soti_api_client
 import logging
 from time import perf_counter
 
 # Get all devices by calling the soti_get_device function until all devices are retrieved
+# The devices are emitted async (as a generator) in batches of 20 devices at a time
 # Returns a counter of the total number of devices
 async def get_all_devices(client:soti_api_client, device_group_path:str, filter, include_subgroups:bool, verify_and_sync:bool) -> AsyncGenerator[dict, None]:
     # Set the initial values for skip and take
@@ -17,7 +18,7 @@ async def get_all_devices(client:soti_api_client, device_group_path:str, filter,
     # Check if there are more devices to fetch
     while True:
         # Get the batch of devices, it returns a list of devices
-        devices = await get_devices(client, device_group_path, filter, include_subgroups, verify_and_sync, skip, take)
+        devices = await get_device_batch(client, device_group_path, filter, include_subgroups, verify_and_sync, skip, take)
         # Check if there are no devices
         if devices is None:
             break
