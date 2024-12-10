@@ -1,11 +1,11 @@
 # test_devices.py
 
 import pytest
-from soti_mobicontrol_api.config import Config
-from soti_mobicontrol_api.soti_api_client import soti_api_client
-from soti_mobicontrol_api.endpoints.device.get_all_devices import get_all_devices
+from soti_mobicontrol_python.config import Config
+from soti_mobicontrol_python.soti_api_client import soti_api_client
+from soti_mobicontrol_python.endpoints.device.get_all_devices import get_all_devices
 
-
+# Test the get_all_devices function
 @pytest.mark.asyncio
 async def test_get_all_devices():
     #

@@ -1,7 +1,8 @@
 # test_auth.py
 import pytest
-import soti_mobicontrol_api.config
-from soti_mobicontrol_api.auth import Auth
+
+from soti_mobicontrol_python.config import Config
+from soti_mobicontrol_python.auth import Auth
 
 # Integration test using the live API
 # This test will fail if the SOTI MobiControl server is not running and the credentials are incorrect
@@ -10,7 +11,7 @@ from soti_mobicontrol_api.auth import Auth
 @pytest.mark.vcr()
 def test_get_access_token():
     # Get the config for the config.json file
-    config = soti_mobicontrol_api.config.Config()
+    config = Config()
     soti_config = config.get_soti_config()
     # Create the auth
     auth = Auth(soti_config)
@@ -23,7 +24,7 @@ def test_get_access_token():
 @pytest.mark.vcr()
 def test_create_soti_headers():
     # Get the config for the config.json file
-    config = soti_mobicontrol_api.config.Config()
+    config = Config()
     soti_config = config.get_soti_config()
     # Create the auth
     auth = Auth(soti_config)

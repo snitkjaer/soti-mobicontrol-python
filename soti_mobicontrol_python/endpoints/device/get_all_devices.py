@@ -1,6 +1,6 @@
 from typing import AsyncGenerator
-from soti_mobicontrol_api.endpoints.device.get_devices import get_devices
-from soti_mobicontrol_api.soti_api_client import soti_api_client
+from .get_devices import get_devices
+from ...soti_api_client import soti_api_client
 import logging
 from time import perf_counter
 

@@ -1,5 +1,5 @@
 import httpx
-from soti_mobicontrol_api.auth import Auth
+from .auth import Auth
 
 class soti_api_client:
     def __init__(self, soti_config: dict):

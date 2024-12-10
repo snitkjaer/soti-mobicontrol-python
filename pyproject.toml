@@ -1,42 +1,22 @@
-[project]
-name = "soti_mobicontrol_api"
+[tool.poetry]
+name = "soti-mobicontrol-python"
 version = "0.1.0"
-description = "A Python wrapper for the SOTI MobiControl API"
+description = "This is Python library wrapper the SOTI MobiControl REST API to manage devices, profiles, and packages. "
+authors = ["snitkjaer <snitkjaer@gmail.com>"]
 readme = "README.md"
-license = { file = "LICENSE" }
-authors = [{ name = "Bo Snitkjaer Nielsen", email = "snitkjaer@gmail.com" }]
-dependencies = [
-    "httpx >= 0.27.0",
-    'tomli; python_version < "3.12"'
-]
-requires-python = ">=3.12"
+license = "MIT"
+repository = "https://github.com/snitkjaer/soti-mobicontrol-python"
 
-[project.optional-dependencies]
-build = ["build", "twine"]
-dev = ["black", "bumpver", "isort", "mypy", "pytest", "pytest-asyncio"]
+[tool.poetry.dependencies]
+python = "^3.13"
+httpx = "0.27.2"
+loguru = "0.7.2"
+anyio = "^4.7.0"
 
-[tool.bumpver]
-current_version = "0.0.1"
-version_pattern = "MAJOR.MINOR.PATCH"
-commit_message = "bump version {old_version} -> {new_version}"
-commit = true
-tag = true
-push = false
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.3"
+pytest-asyncio = "^0.24.0"
 
-[tool.isort]
-profile = "black"
-import_heading_stdlib = "Standard library imports"
-import_heading_thirdparty = "Third party imports"
-import_heading_firstparty = "Parser imports"
-
-[tool.mypy]
-strict = true
-
-[[tool.mypy.overrides]]
-module = "terraform-template-parser"
-ignore_missing_imports = true
-
-[tool.pytest.ini_options]
-pythonpath = [
-  "."
-]
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
