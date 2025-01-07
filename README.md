@@ -45,3 +45,10 @@ poetry add httpx
 ```bash
 poetry build
 ```
+
+### Test the package
+Make sure the the tests are found
+
+```bash
+pytest --collect-only
+```

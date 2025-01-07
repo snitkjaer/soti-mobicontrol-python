@@ -2,7 +2,7 @@
 
 import pytest
 from tests.helper.config import Test_Config
-from soti_mobicontrol_python.soti_api_client import soti_api_client
+from soti_mobicontrol_python.SotiApiClient import SotiApiClient
 from soti_mobicontrol_python.endpoints.device.get_all_devices import get_all_devices
 
 # Test the get_all_devices function
@@ -19,7 +19,7 @@ async def test_get_all_devices():
     device_filter = test_parameters['deviceFilter']
 
     # Create the SOTI API client (httpx.AsyncClient)
-    client = soti_api_client(soti_server_config)
+    client = SotiApiClient(soti_server_config)
     # Device counter
     total_devices = 0
 
