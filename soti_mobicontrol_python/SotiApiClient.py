@@ -22,9 +22,9 @@ class SotiApiClient:
         return response.json()
     
     # Post data to the SOTI server
-    async def post_data(self, endpoint, data=None):
+    async def post_data(self, endpoint:str, body:dict, params=None):
         url = self.base_url + endpoint
-        response = await self.client.post(url=url, headers=self.auth.get_soti_headers(), json=data)
+        response = await self.client.post(url=url, headers=self.auth.get_soti_headers(), json=body, params=params)
         response.raise_for_status()
         return response
     
