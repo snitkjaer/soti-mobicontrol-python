@@ -1,7 +1,7 @@
 from ...SotiApiClient import SotiApiClient
 
 # Send action to a device
-async def send_action(client:SotiApiClient, device_id:str, action_name:str):
+async def send_action(client:SotiApiClient, device_id:str, action_name:str, message:str = None):
     # Validate the action
     validate_action(action_name)
 
@@ -11,6 +11,7 @@ async def send_action(client:SotiApiClient, device_id:str, action_name:str):
     # Create the body
     body = {
         "Action": action_name,
+        "Message": message
     }
 
     return await client.post_data(endpoint, body=body)
