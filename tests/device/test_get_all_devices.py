@@ -29,7 +29,7 @@ async def test_get_all_devices():
     #### Act
     # Get all devices from SOTI for each device group path in groupPaths
     for group in groups:
-        async for device in get_all_devices(client, group, device_filter, True, False):
+        async for device in get_all_devices(client, group, device_filter, False, False):
             print(device.get('DeviceName'))
             total_devices += 1
     

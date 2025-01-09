@@ -28,7 +28,7 @@ async def set_user_on_device(client: SotiApiClient, device_id: str, connection_n
 
 
 
-    return await client.post_data(endpoint, data=data)
+    return await client.post_data(endpoint, body=data)
 
 
 async def get_user_info(client: SotiApiClient, directory_name:str, search_string:str, type:str)->list:

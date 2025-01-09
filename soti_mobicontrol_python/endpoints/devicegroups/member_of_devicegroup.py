@@ -1,5 +1,5 @@
 from ...SotiApiClient import SotiApiClient
-from ...quote_path import quote_path
+from ...transform.path import quote_path
 from .get_devicegroups import get_all_devicegroups
 
 # Moves one or more devices identified by their device IDs to a device group identified by its reference ID.
@@ -9,12 +9,12 @@ from .get_devicegroups import get_all_devicegroups
 
 async def move_devices_to_devicegroup(client:SotiApiClient, path:str, device_ids:list, clear_configurations: bool = False):
     # Get all the device groups and look up the reference nuber for the given path
-    devive_groups = await get_all_devicegroups(client)
+    device_groups = await get_all_devicegroups(client)
     # Clean the path by removing any leading or trailing slashes
     path_cleaned = clean_path(path)
 
     # Search for the device group with the given path
-    for device_group in devive_groups:
+    for device_group in device_groups:
         # Get the path of the device group and clean it 
         ### by removing leading or trailing backslashes
         ### replace backslashes with forward slashes
@@ -50,8 +50,3 @@ async def move_devices_to_devicegroup(client:SotiApiClient, path:str, device_ids
     # Post the data to the endpoint
     return await client.post_data(endpoint, body=device_ids, params=params)
 
-# clean path
-def clean_path(path:str):
-    # Remove any leading or trailing slashes
-    # Replace backslashes with forward
-    return path.strip('\\').strip('/').replace('\\', '/')

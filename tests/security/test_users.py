@@ -12,7 +12,7 @@ async def test_search_for_user():
     soti_server_config = config.get_soti_server_config()
     # Get the test parameters from the config
     test_parameters = config.get_test_parameters()
-    search_string = test_parameters['userSearchString']
+    search_string = test_parameters['mcUserSearchString']
     include_hidden_users = True
     kind = "MobiControlUser"
 
