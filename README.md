@@ -52,3 +52,21 @@ Make sure the the tests are found
 ```bash
 pytest --collect-only
 ```
+
+
+# Manually build and publish the package to https://test.pypi.org/
+Inclenment the version in the pyproject.toml file
+
+## Setup 
+Make sure you have the API token from the https://test.pypi.org/ and configure the repository and the token in the poetry
+```bash
+poetry config repositories.test-pypi https://test.pypi.org/legacy/
+poetry config pypi-token.test-pypi <your-api-token>
+```
+
+
+Build the package and publish it to the test.pypi.org
+```bash
+poetry build
+poetry publish --repository https://test.pypi.org/
+```
