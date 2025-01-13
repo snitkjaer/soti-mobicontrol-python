@@ -62,11 +62,12 @@ Make sure you have the API token from the https://test.pypi.org/ and configure t
 ```bash
 poetry config repositories.test-pypi https://test.pypi.org/legacy/
 poetry config pypi-token.test-pypi <your-api-token>
+
 ```
 
 
 Build the package and publish it to the test.pypi.org
 ```bash
 poetry build
-poetry publish --repository https://test.pypi.org/
+poetry publish --repository test-pypi
 ```
