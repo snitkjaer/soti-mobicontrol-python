@@ -16,7 +16,7 @@ async def send_action(client:SotiApiClient, device_id:str, action_name:str, mess
 
     return await client.post_data(endpoint, body=body)
 
-
+# Validate the action
 def validate_action(action_name:str):
     # Supported Actions:
     supported_actions = [

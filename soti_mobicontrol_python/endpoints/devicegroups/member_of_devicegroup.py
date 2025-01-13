@@ -1,5 +1,5 @@
 from ...SotiApiClient import SotiApiClient
-from ...transform.path import quote_path
+from ...helper.path import clean_path
 from .get_devicegroups import get_all_devicegroups
 
 # Moves one or more devices identified by their device IDs to a device group identified by its reference ID.
