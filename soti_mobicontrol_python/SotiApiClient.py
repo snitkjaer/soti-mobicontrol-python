@@ -37,3 +37,10 @@ class SotiApiClient:
         response = await self.client.put(url=url, headers=self.auth.get_soti_headers(),json=data)
         response.raise_for_status()
         return response
+    
+    # Check if the service is available
+    async def check_service(self):
+        url = self.base_url + "/v1/system/info"
+        response = await self.client.get(url=url, headers=self.auth.get_soti_headers())
+        response.raise_for_status()
+        return response.json()
