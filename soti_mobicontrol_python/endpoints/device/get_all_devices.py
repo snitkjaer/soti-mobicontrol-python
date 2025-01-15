@@ -4,7 +4,7 @@ from ...SotiApiClient import SotiApiClient
 import logging
 from time import perf_counter
 
-# Get all devices by calling the get_device_batch function until all devices are retrieved
+# Get all devices in a group by calling the get_device_batch function until all devices are retrieved
 # The devices are emitted async (as a generator) in batches of 20 devices at a time
 # Returns a counter of the total number of devices
 async def get_all_devices(client:SotiApiClient, device_group_path:str, filter, include_subgroups:bool, verify_and_sync:bool) -> AsyncGenerator[dict, None]:
@@ -36,7 +36,7 @@ async def get_all_devices(client:SotiApiClient, device_group_path:str, filter, i
     # Stop the performance timer
     t1_stop = perf_counter()
 
-    # Log the total number of devices and the time it took to retrieve them
-    logging.info(f"Total number of devices from SOTI: {total_devices}. Time: {t1_stop - t1_start:.0f} seconds")
+    # Log the total number of devices in a group and the time it took to retrieve them
+    logging.debug(f"Total number of devices from SOTI in \"{device_group_path}\" : {total_devices}. Time: {t1_stop - t1_start:.0f} seconds")
 
 

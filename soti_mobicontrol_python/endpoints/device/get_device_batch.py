@@ -7,18 +7,33 @@ from ..devicegroups.get_devicegroups import get_devicegroup_reference_id
 async def get_device_batch(client:SotiApiClient, device_group_path:str, filter, include_subgroups:bool, verify_and_sync:bool, skip:int, take:int):
     endpoint = "/devices/search"
 
-    # Get the group path reference id
-    reference_id = await get_devicegroup_reference_id(client, device_group_path)
-
-    # Set the query parameters
-    params = {
-        "groupPath": f"referenceId:{reference_id}",
-        "includeSubgroups": str(include_subgroups),
-        "verifyAndSync": str(verify_and_sync),
-        "skip": skip,
-        "take": take
-    
+    # The reference id work for all groups except the root group
+    # As root group we accept /, // \, \\, and empty string or none
+    if device_group_path is None or device_group_path in ["", "/", "\\", "//", "\\\\" ]:
+        # This is the root group
+        # Set the query parameters
+        params = {
+            "includeSubgroups": str(include_subgroups),
+            "verifyAndSync": str(verify_and_sync),
+            "skip": skip,
+            "take": take
+        
     }
+    else:
+        # Get the group path reference id
+        reference_id = await get_devicegroup_reference_id(client, device_group_path)
+        group_path = f"referenceId:{reference_id}"
+        # Set the query parameters
+        params = {
+            "groupPath": group_path,
+            "includeSubgroups": str(include_subgroups),
+            "verifyAndSync": str(verify_and_sync),
+            "skip": skip,
+            "take": take
+        
+        }
+
+
 
     # TODO add filter to params
 

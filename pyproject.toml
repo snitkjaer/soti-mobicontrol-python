@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "soti_mobicontrol_python"
-version = "0.7.0"
+version = "0.7.1"
 description = "This is Python library wrapper the SOTI MobiControl REST API to manage devices, profiles, and packages. "
 authors = ["snitkjaer <snitkjaer@gmail.com>"]
 readme = "README.md"
