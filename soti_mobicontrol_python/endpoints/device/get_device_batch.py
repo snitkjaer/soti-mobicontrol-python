@@ -1,4 +1,7 @@
-import urllib.parse
+# Description: This file contains the code to get a batch of devices from the SOTI API
+# The code uses the SotiApiClient to make the request to the SOTI API
+# The code also uses the get_devicegroup_reference_id function to get the reference id of the device group
+import logging
 
 from ...SotiApiClient import SotiApiClient
 from ..devicegroups.get_devicegroups import get_devicegroup_reference_id
@@ -6,6 +9,8 @@ from ..devicegroups.get_devicegroups import get_devicegroup_reference_id
 # Get a batch of devices from the SOTI API
 async def get_device_batch(client:SotiApiClient, device_group_path:str, filter, include_subgroups:bool, verify_and_sync:bool, skip:int, take:int):
     endpoint = "/devices/search"
+
+    logging.debug(f"Getting devices from group {device_group_path}")
 
     # The reference id work for all groups except the root group
     # As root group we accept /, // \, \\, and empty string or none

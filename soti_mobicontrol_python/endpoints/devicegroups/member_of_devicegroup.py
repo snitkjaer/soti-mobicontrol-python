@@ -1,3 +1,4 @@
+import logging
 from ...SotiApiClient import SotiApiClient
 from ...helper.path import clean_path
 from .get_devicegroups import get_all_devicegroups
@@ -8,6 +9,7 @@ from .get_devicegroups import get_all_devicegroups
 # Requires the caller be granted the "View Groups" and "Manage Devices" permission for both the source and destination device groups.
 
 async def move_devices_to_devicegroup(client:SotiApiClient, path:str, device_ids:list, clear_configurations: bool = False):
+    logging.debug(f"Moving device ids {device_ids} to device group with path {path}")
     # Get all the device groups and look up the reference nuber for the given path
     device_groups = await get_all_devicegroups(client)
     # Clean the path by removing any leading or trailing slashes
@@ -22,9 +24,11 @@ async def move_devices_to_devicegroup(client:SotiApiClient, path:str, device_ids
         if device_group_path == path_cleaned:
             reference_id = device_group['ReferenceId']
             break
+        else:
+            reference_id = None
 
     # Male sure the path was found elese raise an exception
-    if reference_id == None:
+    if reference_id is None:
         raise Exception(f"Device group with path {path} not found")
     
     # /devicegroups/{path}/members

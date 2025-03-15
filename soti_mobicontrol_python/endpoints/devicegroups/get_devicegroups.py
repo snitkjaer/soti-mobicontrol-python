@@ -1,15 +1,17 @@
-import urllib.parse
+import logging
 from ...SotiApiClient import SotiApiClient
 from ...helper.path import clean_path
 
 # Get all device groups
 async def get_all_devicegroups(client:SotiApiClient):
+    logging.debug("Getting all device groups")
     endpoint = "/devicegroups"
     return await client.get_data(endpoint)
 
 
 # Get specific device groups with parent path
 async def get_devicegroup_with_parrent(client:SotiApiClient, parrent_path:str):
+    logging.debug(f"Getting device groups with parent path {parrent_path}")
     # Get all the device groups and look up the reference nuber for the given path
     device_groups = await get_all_devicegroups(client)
     # Clean the path by removing any leading or trailing slashes
@@ -32,6 +34,7 @@ async def get_devicegroup_with_parrent(client:SotiApiClient, parrent_path:str):
 
 # Get referenceId of a device group with a given path
 async def get_devicegroup_reference_id(client:SotiApiClient, path:str):
+    logging.debug(f"Getting device group reference id for path {path}")
     # Get all the device groups and look up the reference nuber for the given path
     device_groups = await get_all_devicegroups(client)
     # Clean the path by removing any leading or trailing slashes
@@ -46,9 +49,11 @@ async def get_devicegroup_reference_id(client:SotiApiClient, path:str):
         if device_group_path == path_cleaned:
             reference_id = device_group['ReferenceId']
             break
+        else:
+            reference_id = None
 
     # Make sure the path was found else raise an exception
-    if reference_id == None:
+    if reference_id is None:
         raise Exception(f"Device group with path {path} not found")
     
     return reference_id

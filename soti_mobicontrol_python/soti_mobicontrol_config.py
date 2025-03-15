@@ -1,7 +1,6 @@
-import json
 from dataclasses import dataclass
-from typing import List, Optional
 import logging
+
 
 @dataclass
 class SotiMobiControlServerConfig:
