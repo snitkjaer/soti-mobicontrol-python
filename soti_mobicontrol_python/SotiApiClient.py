@@ -38,6 +38,13 @@ class SotiApiClient:
         response.raise_for_status()
         return response
     
+    # Delete data from the SOTI server
+    async def delete_data(self, endpoint):
+        url = self.base_url + endpoint
+        response = await self.client.delete(url=url, headers=self.auth.get_soti_headers())
+        response.raise_for_status()
+        return response
+
     # Check if the service is available
     async def check_service(self):
         url = self.base_url + "/v1/system/info"

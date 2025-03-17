@@ -30,7 +30,7 @@ async def set_user_on_device(client: SotiApiClient, device_id: str, connection_n
 
     return await client.post_data(endpoint, body=data)
 
-
+# Get user info
 async def get_user_info(client: SotiApiClient, directory_name:str, search_string:str, type:str)->list:
     # Validate type is User, Group or Both
     if type not in ['User', 'Group', 'Both']:
@@ -47,3 +47,7 @@ async def get_user_info(client: SotiApiClient, directory_name:str, search_string
     # The response is a list of users
     return response
     
+# Delete user from device
+async def delete_user_from_device(client: SotiApiClient, device_id: str):
+    endpoint = f"/devices/{device_id}/user"
+    return await client.delete_data(endpoint)
